@@ -1,0 +1,19 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.9.0'
+    id 'application'
+}
+
+application {
+    mainClass.set('com.yuri.pokerlogic.MainKt')
+}
+
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// Configuração correta do toolchain Kotlin JVM
+kotlin {
+    jvmToolchain(17)
+}
