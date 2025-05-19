@@ -27,9 +27,9 @@ class GameManager(var players: MutableList<Player> = mutableListOf()) {
     var cartaMesa5: Card? = null
 
     fun inicio() {
-//        dealer = players.random() // DEALER ALEATORIO
+        dealer = players.random() // DEALER ALEATORIO
 
-        dealer = players[0] // MUDAR ISSO AQUI DEPOIS
+//        dealer = players[0] // MUDAR ISSO AQUI DEPOIS
 
         players[0].mao.clear()
         players[1].mao.clear()
@@ -39,7 +39,7 @@ class GameManager(var players: MutableList<Player> = mutableListOf()) {
 
         players[1].mao.add(Card.getCartaAleatoria())
         players[1].mao.add(Card.getCartaAleatoria())
-        verifVariaveisZeradas()
+//        verifVariaveisZeradas()
 
         if (dealer == players[0]) {
             checkVez = true
@@ -220,16 +220,25 @@ class GameManager(var players: MutableList<Player> = mutableListOf()) {
 
         for (player in players) {
             val todasCartas = player.mao + cartasMesa
+
+            // EX: SE TIVER 3 CARTAS ÁS E 2 CARTAS 4 FICARIA ASSIM NO OUTPUT: {A=3} {4=2}
             val contagemValores = todasCartas.groupingBy { it.valor }.eachCount()
 
-            val pares = contagemValores.filter { it.value == 2 }
-            val trincas = contagemValores.filter { it.value == 3 }
+            val flush = todasCartas.groupBy { it.naipe }.any() { it.value.size >= 5 }
+            val quadras = contagemValores.filter { it.value == 4 }
+            val pares = contagemValores.filter { it.value == 2 } // AQUI ELE TA FILTRANDO OS VALORES QUE APARECEM COMO PARES
+            val fullhouse = contagemValores.filter { it.value == 3 && pares.isNotEmpty() }
+            val trincas = contagemValores.filter { it.value == 3 } // AQUI ELE TA FAZENDO A MESMA COISA SÓ QUE COM TRINCAS
 
             when {
+                flush -> resultados[player] = "Flush de ${todasCartas.first().naipe}"
+                fullhouse.isNotEmpty() -> resultados[player] = "Fullhouse de ${fullhouse.keys.first()} e ${pares.keys.first()}"
+                quadras.isNotEmpty() -> resultados[player] = "Quadra de ${quadras.keys.first()}"
                 trincas.isNotEmpty() -> resultados[player] = "Trinca de ${trincas.keys.first()}"
                 pares.isNotEmpty() -> resultados[player] = "Par de ${pares.keys.first()}"
                 else -> resultados[player] = "Nada"
             }
+
         }
 
         println("RESULTADOS:")
@@ -238,9 +247,23 @@ class GameManager(var players: MutableList<Player> = mutableListOf()) {
         }
 
         val vencedor = when {
+
+            resultados.values.any { it.startsWith("Flush") } -> {
+                resultados.filterValues { it.startsWith("Flush") }.keys.first()
+            }
+
+            resultados.values.any { it.startsWith("Fullhouse") } -> {
+                resultados.filterValues { it.startsWith("Fullhouse") }.keys.first()
+            }
+
+            resultados.values.any { it.startsWith("Quadra") } -> {
+                resultados.filterValues { it.startsWith("Quadra") }.keys.first()
+            }
+
             resultados.values.any { it.startsWith("Trinca") } -> {
                 resultados.filterValues { it.startsWith("Trinca") }.keys.first()
             }
+
             resultados.values.any { it.startsWith("Par") } -> {
                 resultados.filterValues { it.startsWith("Par") }.keys.first()
             }
@@ -295,7 +318,7 @@ class GameManager(var players: MutableList<Player> = mutableListOf()) {
             print("BOT PENSANDO")
 
             for (i in 1..3) {
-                Thread.sleep(500) // Espera meio segundo
+                Thread.sleep(500)
                 print(".")
                 System.out.flush()
             }

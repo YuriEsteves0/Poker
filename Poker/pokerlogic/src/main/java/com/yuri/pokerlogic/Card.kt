@@ -31,5 +31,9 @@ class Card (val naipe: naipe, val valor: valor){
                 val valorAleatorio = naipe.values().random()  // Seleciona aleatoriamente o valor
                 return Card(valorAleatorio, naipeAleatorio)   // Retorna a carta com naipe e valor aleatório
         }
+
+        fun simularCard(naipe: naipe, valor: valor): Card {
+            return Card(naipe, valor)
+        }
     }
 }
