@@ -17,11 +17,11 @@
 - 🤖 Bot com decisões baseadas em probabilidade  
 - 💰 Gerenciamento de apostas: Check, Call, Raise, Fold  
 - ⏱️ Blinds automáticos e controle do pote  
-- 🏆 Avaliação básica das mãos (Par, Trinca, Carta alta) e definição do vencedor  
+- 🏆 Avaliação das mãos (Par, Trinca, Carta alta, Full House, etc) e definição do vencedor  
 
 ## Em breve
 
-- 📊 Lógica de avaliação completa (Straight, Flush, Full House, etc.)  
+- 📊 Lógica de avaliação completa (Straight, Flush, etc.)  
 - 🧠 Bot mais inteligente com estratégias baseadas nas cartas visíveis  
 - 🖥️ Interface gráfica com visual mais interativo 
 - 👥 Autenticação de usuários e perfis personalizados  
