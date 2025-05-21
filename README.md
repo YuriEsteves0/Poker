@@ -3,6 +3,9 @@
 
 **Poker Mania: Mestre das Cartas** é um projeto pessoal desenvolvido em Kotlin com o objetivo de simular partidas de poker entre dois jogadores. Ideal para quem curte lógica de jogos, dados complexos e está em busca de reforçar conceitos de orientação a objetos, estrutura de dados e controle de fluxo.  
 
+> ⚠️ *Este projeto é de caráter educacional e não possui fins comerciais. Algumas ideias visuais foram inspiradas em outros apps populares de poker, com o objetivo de estudo de usabilidade e interface.*
+
+
 ![Poker Mania Modo Texto](https://github.com/YuriEsteves0/Poker/blob/main/ImagensApp/PokerMania.png)
 
 ## Demonstração
